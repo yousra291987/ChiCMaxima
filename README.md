@@ -25,13 +25,13 @@ Usage
 You can get a list of ChiCMaxima' command line arguments by passing the --help parameter. The current arguments are:
 
  Options:
- 
-    |-i/--input			    <string>	   [default:input  ]
+    
+    -i/--input			    <string>	   [default:input  ]
     -o/--output       <string>    [default:./ouput]
     -w/--window_size  <string>    [default: 50    ]
     -s/--loess_span   <string>    [default: 0.05  ]
     -h/--help                       
-    |
+    
 
 An example run on chromosome 1 of a mouse embryonic stem cells (Schoenfelder et al, 2015):
 
