@@ -26,7 +26,7 @@ You can get a list of ChiCMaxima' command line arguments by passing the --help p
 
  Options:
     
-    -i/--input			    <string>	   [default:input  ]
+    -i/--input			     <string>	   [default:input  ]
     -o/--output       <string>    [default:./ouput]
     -w/--window_size  <string>    [default: 50    ]
     -s/--loess_span   <string>    [default: 0.05  ]
