@@ -1,10 +1,8 @@
 # ChiCMaxima
 
-ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data.
+ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data. ChiCMaxima consists of 3 Rscripts: Chi
 Current release: ChiCMaxima 0.9
 
-
-# Installation
 
 
 # Input format
@@ -42,7 +40,7 @@ We have also added a simple example in the "examples/" directory for your conven
 
 # Output format
 
-ChiCMaxima will produce files containing the significant interactions with the same columns as the input table.
+ChiCMaxima will produce files containing the significant interactions with same columns as the input table.
 
 # Dependencies:
 
