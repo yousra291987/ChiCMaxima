@@ -1,6 +1,8 @@
 # ChiCMaxima
 
-ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data. ChiCMaxima consists of 3 Rscripts: Chi
+ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data. ChiCMaxima consists of 3 Rscripts: ChiCMaxima_caller.r, Histogram_ChiCMaxima.r and ChiCMaxima_Total.r
+
+
 Current release: ChiCMaxima 0.9
 
 
