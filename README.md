@@ -4,10 +4,10 @@ ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CH
 Current release: ChiCMaxima 0.9
 
 
-Installation
+# Installation
 
 
-Input format
+# Input format
 
 The current version uses ibed matrices with 11 columns in which the coordinates of both interacting regions plus the number of reads are present.
  For example:
@@ -20,7 +20,7 @@ The current version uses ibed matrices with 11 columns in which the coordinates 
 
 ChiCMaxima will produce files with 11 columns that look like the Input which corresponds to the significant interactions.
 
-Usage
+# Usage
 
 You can get a list of ChiCMaxima' command line arguments by passing the --help parameter. The current arguments are:
 
@@ -40,8 +40,11 @@ ChiCMaxima_caller.r -i Chr1_ES.ibed -o Chr1_ES_significant_interactions.ibed
 
 We have also added a simple example in the "examples/" directory for your convenience.
 
+# Output format
 
-Dependencies:
+ChiCMaxima will produce files containing the significant interactions with the same columns as the input table.
+
+# Dependencies:
 
     R version >= 3.2
     Bioconductor packages: Rsamtools,GenomicRanges, limma, MASS, caTools, data.table, base, zoo, RcppRoll, psych, plyr, ICSNP 
