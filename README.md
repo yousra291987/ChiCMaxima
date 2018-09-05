@@ -39,6 +39,7 @@ An example run on chromosome 1 of a mouse embryonic stem cells (Schoenfelder et 
 ChiCMaxima_caller.r -i Chr1_ES.ibed -o Chr1_ES_significant_interactions.ibed
  
 To add more stringency you can intersect data from biological replicates with possibility to have a flexible window of intersection. To do so:
+
 2/ Using Histogram_ChiCMaxima.r you can identify the flexible window size to use for biological replicates intersection.
 
 3/ Finally, with ChiCMaxima_Total.r you can identify significant interactions that are reproducible in the biological replicates.
@@ -65,6 +66,7 @@ Example of CHi-C promoters data visualized by the ChiCMaxima Browser
  # Questions and contacts
  
  For FAQs, or for asking new questions, please see our forum: 
+ 
  yousra.ben-zouari@fmi.ch
  sexton@igbmc.fr
 
