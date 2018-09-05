@@ -1,11 +1,8 @@
 # ChiCMaxima
 
-ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data. ChiCMaxima consists of 3 Rscripts: ChiCMaxima_caller.r, Histogram_ChiCMaxima.r and ChiCMaxima_Total.r
-
+ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data. ChiCMaxima consists of 3 Rscripts: ChiCMaxima_caller.r, Histogram_ChiCMaxima.r and ChiCMaxima_Total.r, in addition to an R Browser to visualise CHi-C promoters data with called peaks. 
 
 Current release: ChiCMaxima 0.9
-
-
 
 # Input format
 
@@ -22,6 +19,10 @@ ChiCMaxima will produce files with 11 columns that look like the Input which cor
 
 # Usage
 
+To call significant interactions in CHi-C data:
+
+1/ Using ChiCMaxima_caller.r you can get a list of significant interactions in your data. 
+
 You can get a list of ChiCMaxima' command line arguments by passing the --help parameter. The current arguments are:
 
  Options:
@@ -36,6 +37,13 @@ You can get a list of ChiCMaxima' command line arguments by passing the --help p
 An example run on chromosome 1 of a mouse embryonic stem cells (Schoenfelder et al, 2015):
 
 ChiCMaxima_caller.r -i Chr1_ES.ibed -o Chr1_ES_significant_interactions.ibed
+ 
+To add more stringency you can intersect data from biological replicates with possibility to have a flexible window of intersection. To do so:
+2/ Using Histogram_ChiCMaxima.r you can identify the flexible window size to use for biological replicates intersection.
+
+3/ Finally, with ChiCMaxima_Total.r you can identify significant interactions that are reproducible in the biological replicates.
+
+
 
 
 We have also added a simple example in the "examples/" directory for your convenience.
@@ -44,8 +52,19 @@ We have also added a simple example in the "examples/" directory for your conven
 
 ChiCMaxima will produce files containing the significant interactions with same columns as the input table.
 
+# ChiCMaxima Browser
+
+Example of CHi-C promoters data visualized by the ChiCMaxima Browser
+
 # Dependencies:
 
     R version >= 3.2
     Bioconductor packages: Rsamtools,GenomicRanges, limma, MASS, caTools, data.table, base, zoo, RcppRoll, psych, plyr, ICSNP 
+ 
+ 
+ # Questions and contacts
+ 
+ For FAQs, or for asking new questions, please see our forum: 
+ yousra.ben-zouari@fmi.ch
+ sexton@igbmc.fr
 
