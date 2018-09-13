@@ -1,8 +1,18 @@
 # ChiCMaxima
 
-ChiCMaxima pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data. ChiCMaxima consists of 5 Rscripts: ChiCMaxima_Caller.r, ChiCMaxima_Collate.r, ChiCMaxima_MergeRep2.r,ChiCMaxima_MergeRepMany.r and ChiCMaxima_RepAnalysis.r, in addition to an R Browser (ChiCBrowser.r) to visualise CHi-C promoters data with called peaks. 
 
-Current release: ChiCMaxima 1.0
+
+
+
+
+
+ChiCMaxima: a pipeline for analyzing  and identificantion of chromation loops in CHi-C promoters data.
+
+# Current release: ChiCMaxima 1.0
+
+ChiCMaxima consists of 5 Rscripts: ChiCMaxima_Caller.r, ChiCMaxima_Collate.r, ChiCMaxima_MergeRep2.r,ChiCMaxima_MergeRepMany.r and ChiCMaxima_RepAnalysis.r, in addition to an R Browser (ChiCBrowser.r) to visualise CHi-C promoters data with called peaks. 
+
+
 
 # Input format
 
@@ -169,7 +179,9 @@ Outputs an ibed file, with N columns N.1 and N.2, identical to that already prov
 
 To run the browser, go to the folder containing the scripts and run the R environment. Then use the command: source(“ChiCBrowser.r”).
 See AdditionalFile 2 for more explanation
+
 ![alt text](https://github.com/yousra291987/ChiCMaxima/blob/master/logo/screenshot_browser.png)
+
 
 # Dependencies:
 
