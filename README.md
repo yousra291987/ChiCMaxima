@@ -86,48 +86,89 @@ Rscript ChiCMaxima_RepAnalysis.r -a testdata/mESrep1_interactions.ibed -b testda
 ```
 Returns the histogram, cumulative frequency plot and percentiles table (25th percentile is 0; median is 18687 bp; 75th percentile is 79633.5 bp).
 
+3/ ChiCMaxima_MergeRep2
+
+Brief: Filters the called interactions from two biological replicates to only include those within a threshold genomic distance.
+```
+Usage (from folder containing scripts): Rscript ChiCMaxima_MergeRep2.r -a/--onepeak [INTERACTIONS FILE 1] -b/--twopeak [INTERACTIONS FILE 2] -d/--repdist [THRESHOLD DISTANCE] -o/--output [OUTPUT IBED FILE]
+
+Arguments:
+
+--onepeak, and
+--twopeak. The output interaction files from ChiCMaxima_Caller, in the headed 12-column ibed format.
+--repdist. The maximum genomic distance between the closest interactions within the two replicates for the interaction to be
+maintained. Default: 0
+--output. The file name for the output ibed file of the merged, filtered interactions list.
+```
 
 
+Outputs:
+
+The merged ibed file (see above for column headings).
+
+Example:
+```R
+Rscript ChiCMaxima_MergeRep2.r -a testdata/mESrep1_interactions.ibed -b testdata/mESrep2_interactions.ibed -d 20000 -o testdata/mEScombined_interactions.ibed
+```
+Returns 803 merged interactions.
 
 
+4/ ChiCMaxima_MergeRepMany
 
+Brief: Filters the called interactions from three or more biological replicates to only include those within a threshold distance.
+```
+Usage (from folder containing scripts): Rscript ChiCMaxima_MergeRepMany.r [THRESHOLD DISTANCE] [OUTPUT IBED FILE] [INTERACTIONS FILE 1] [INTERACTIONS FILE 2] [INTERACTIONS FILE 3] … [INTERACTIONS FILE n]
 
+Arguments (note that these do not come with a “-“ or “--“ prefix):
 
+THRESHOLD DISTANCE. As --repdist in ChiCMaxima_MergeRep2. There is no default setting, since all arguments must be entered.
 
+OUTPUT IBED FILE. As --output in ChiCMaxima_MergeRep2.
 
+INTERACTIONS FILES. A list of three or more interaction ibed files for merging.
+```
 
+Outputs:
 
+The merged ibed file (see above for column headings).
 
+Example:
+```R
+Rscript ChiCMaxima_MergeRepMany.r 20000 testdata/3combinedinteractions.ibed testdata/mESrep1_interactions.ibed testdata/mESrep2_interactions.ibed testdata/otherinteractions_chr15.ibed
+```
+Returns 643 merged interactions.
 
+5/ ChiCMaxima_Collate
 
+Brief: Reads in the input ibed files from different CHi-C experiments and collates them into one large ibed file with separate N columns for each dataset, suitable as input for ChiCBrowser.
 
+```
+Usage (from folder containing scripts): Rscript ChiCMaxima_Collate.r -k/--key [COLLATE KEY] -o/--output [OUTPUT IBED FILE]
 
+Arguments:
 
+--key. File name of a user-provided table which gives the names of all the input ibed files to be collated, along with their unique
+identifiers for the experiment-specific N column. As shown in testdata/collate_key.txt, this is a non-headed 2-column table: IBED FILE,
+IDENTIFIER.
 
+--output. File name for the output collated ibed file.
+```
+Outputs:
 
+Headed columns: ID_Bait, chr_Bait, start_Bait, end_Bait, Bait_name, ID_OE, chr_OE, start_OE, end_OE, OE_name, N.[IDENTIFIER 1], N.[IDENTIFIER 2], etc.
 
+Example
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```R
+Rscript ChiCMaxima_Collate.r -k testdata/collate_key.txt -o testdata/testcollate.ibed
+```
+Outputs an ibed file, with N columns N.1 and N.2, identical to that already provided: testdata/mEScollated.ibed
 
 
 # ChiCMaxima Browser
 
-Example of CHi-C promoters data visualized by the ChiCMaxima Browser
+To run the browser, go to the folder containing the scripts and run the R environment. Then use the command: source(“ChiCBrowser.r”).
+See AdditionalFile 2 for more explanation
 
 # Dependencies:
 
