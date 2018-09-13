@@ -169,6 +169,7 @@ Outputs an ibed file, with N columns N.1 and N.2, identical to that already prov
 
 To run the browser, go to the folder containing the scripts and run the R environment. Then use the command: source(“ChiCBrowser.r”).
 See AdditionalFile 2 for more explanation
+![alt text](https://raw.githubusercontent.com/yousra291987/ChiCMaxima/logo/screenshot_browser.png)
 
 # Dependencies:
 
