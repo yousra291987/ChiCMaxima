@@ -1,0 +1,3 @@
+This contains the mm9_HindIII baitmap and rmap files, which are used to convert different Hi-C analysis outputs to the input ibed for ChiCMaxima. 
+There are also two scripts, one which is a generic one to convert many text-delimited output files to ibed (you just need to specify which column contains the chromosome and coordinate for each of the paired reads), 
+and another one to specifically convert the BAM files from HICUP (it just matches to bait with bedtools, then runs the generic script on the temp file it generates). 
