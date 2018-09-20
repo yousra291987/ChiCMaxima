@@ -1,6 +1,6 @@
 # ChiCMaxima
 
-![alt text](https://github.com/yousra291987/ChiCMaxima/blob/master/logo/chromatin_loops.png)
+![alt text](https://github.com/yousra291987/ChiCMaxima/blob/master/logo/logo.pdf)
 
 
 
