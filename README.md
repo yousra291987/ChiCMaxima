@@ -1,6 +1,6 @@
 # ChiCMaxima
 
-![alt text](https://github.com/yousra291987/ChiCMaxima/blob/master/logo/logo.pdf)
+![alt text](https://github.com/yousra291987/ChiCMaxima/blob/master/logo/logo-page-001.jpg)
 
 
 
