@@ -191,7 +191,7 @@ See AdditionalFile 2 for more explanation
  
  # Questions and contacts
  
- For FAQs, or for asking new questions, please see our forum: 
+ For FAQs, or for asking new questions, please contact: 
  
  yousra.ben-zouari@fmi.ch
  sexton@igbmc.fr
