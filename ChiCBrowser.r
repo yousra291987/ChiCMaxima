@@ -1,15 +1,3 @@
-##############################################################################
-# CHi-C Browser
-# Copyright (C) (2019) Yousra Ben Zouari & Tom Sexton
-#
-# This program is free software; you can distribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-###############################################################################
-
-
 options(warn=-1)
 suppressPackageStartupMessages(require(tcltk2))
 suppressPackageStartupMessages(require(tkrplot))
@@ -257,8 +245,8 @@ verify.settings=function() {
 		assign[i] = as.integer(tkget(set$entry[[i]]))
 	}
 	names(assign) = N
-	assign=assign[is.integer(assign) & assign>0]
-	levels=unique(assign)
+	keep=assign[is.integer(assign) & assign>0]
+	levels=unique(keep)
 	settings <<- list()
 	for (l in 1:length(levels)) {
 		settings[[levels[l]]] <<- list()
