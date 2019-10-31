@@ -524,11 +524,13 @@ refresh.gui = function() {
 	hscale = 1.99
 	vscale = 1.99
 	if(is.null(browse$env$plot)) {
-		browse$env$plot = tkrplot(browse, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale)
+		options(show.error.messages = FALSE)
+		browse$env$plot = try(tkrplot(browse, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale),silent=TRUE)
 		tkgrid(browse$env$plot)
 	}
 	else {
-		tkrreplot(browse$env$plot, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale)
+		options(show.error.messages = FALSE)
+		try(tkrreplot(browse$env$plot, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale),silent=TRUE)
 		tkgrid(browse$env$plot)
 	}
 }
