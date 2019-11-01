@@ -42,7 +42,7 @@ changeintcolor=function() {
 	color = tclvalue(.Tcl(paste("tk_chooseColor",.Tcl.args(initialcolor=ints[[to.change]]$color, title="Choose Color"))))
 	tkconfigure(manint$env$canvas[[to.change]], bg=color)
 	if(nchar(color)>0) {
-		ints[[to.change]]$color <- color
+		ints[[to.change]]$color <<- color
 		tkconfigure(manint$env$canvas[[to.change]], bg=color)
 	}
 }
@@ -50,29 +50,29 @@ changeintcolor=function() {
 #Interaction plot settings util
 verify.int.settings=function() {
 	for (i in 1:length(ints)) {
-		ints[[i]]$name <- as.character(tkget(pint$name[[i]]))
-		ints[[i]]$plot <- as.character(tclvalue(intplots[[i]]))
+		ints[[i]]$name <<- as.character(tkget(pint$name[[i]]))
+		ints[[i]]$plot <<- as.character(tclvalue(intplots[[i]]))
 	}
 	tkdestroy(manint)
 }
 
 #Interaction plot settings
 manage.ints=function() {
-	manint <- tktoplevel()
+	manint <<- tktoplevel()
 	tktitle(manint)="Plot settings for interactions"
 	labcol=tklabel(manint,text="Color")
 	labplot=tklabel(manint,text="Plot")
 	manint$env$change = tk2button(manint, text="Change Color", command=changeintcolor)
-	to.change <- tkentry(manint,width=5,textvariable=tclVar("1"))
+	to.change <<- tkentry(manint,width=5,textvariable=tclVar("1"))
 	tkgrid(labcol, row=1, column=2, padx=15, pady=5)
 	tkgrid(labplot, row=1, column=3, padx=15, pady=5)
 	tkgrid(manint$env$change, row=1, column=4, padx=15, pady=5)
 	tkgrid(to.change, row=1, column=5, padx=15, pady=5)
 	for (i in 1:length(ints)) {
-		pint$name[[i]] <- tkentry(manint,width=10,textvariable=tclVar(ints[[i]]$name))
+		pint$name[[i]] <<- tkentry(manint,width=10,textvariable=tclVar(ints[[i]]$name))
 		manint$env$canvas[[i]] = tk2canvas(manint,width=30,height=10,bg=ints[[i]]$color)
-		manint$env$plot[[i]] <- tk2checkbutton(manint)
-		intplots[[i]] <- tclVar(ints[[i]]$plot)
+		manint$env$plot[[i]] <<- tk2checkbutton(manint)
+		intplots[[i]] <<- tclVar(ints[[i]]$plot)
 		tkconfigure(manint$env$plot[[i]], variable=intplots[[i]])
 		tkgrid(pint$name[[i]],row=i+1,column=1,padx=15,pady=5)
 		tkgrid(manint$env$canvas[[i]],row=i+1,column=2,padx=15,pady=5)
@@ -90,15 +90,15 @@ load.ints=function() {
 	}
 	files=unlist(strsplit(files,split=" ",fixed=FALSE,perl=FALSE,useBytes=FALSE))
 	for (i in 1:length(files)) {
-		ints[[i]] <- list()
+		ints[[i]] <<- list()
 		int.name = unlist(strsplit(files[i],"/"))
 		int.name=int.name[length(int.name)]
 		int.name=unlist(strsplit(int.name,"\\."))
 		int.name=paste(int.name[-(length(int.name))],collapse="")
-		ints[[i]]$name <- int.name
-		ints[[i]]$color <- plotcols[i]
-		ints[[i]]$plot <- "1"
-		ints[[i]]$ibed <- read.table(files[i],header=TRUE,stringsAsFactors=FALSE)
+		ints[[i]]$name <<- int.name
+		ints[[i]]$color <<- plotcols[i]
+		ints[[i]]$plot <<- "1"
+		ints[[i]]$ibed <<- read.table(files[i],header=TRUE,stringsAsFactors=FALSE)
 	}
 }
 
@@ -111,7 +111,7 @@ load.genes=function() {
 	if(!nchar(fn)) {
 		return()
 	}
-	genome <- read.table(fn,header=TRUE,stringsAsFactors=FALSE)
+	genome <<- read.table(fn,header=TRUE,stringsAsFactors=FALSE)
 }
 
 #Epigenomic tracks
@@ -131,27 +131,27 @@ changetrkcolor=function() {
 verify.trk.settings=function() {
 	for (i in 1:length(epigenome)) {
 		level = as.integer(tkget(trks$entry[[i]]))
-		epigenome[[i]]$level <- level
+		epigenome[[i]]$level <<- level
 	}
 	tkdestroy(mantrk)
 }
 
 #Plotting setting for tracks
 manage.tracks=function() {
-	mantrk <- tktoplevel()
+	mantrk <<- tktoplevel()
 	tktitle(mantrk)="Plot settings for tracks"
 	labcol=tklabel(mantrk,text="Color")
 	lablev=tklabel(mantrk,text="Level")
 	mantrk$env$change = tk2button(mantrk,text="Change Color", command=changetrkcolor)
-	to.change <- tkentry(mantrk,width=5,textvariable=tclVar("1"))
+	to.change <<- tkentry(mantrk,width=5,textvariable=tclVar("1"))
 	tkgrid(labcol,row=1,column=2,padx=15,pady=5)
 	tkgrid(lablev,row=1,column=3,padx=15,pady=5)
 	tkgrid(mantrk$env$change,row=1,column=4,padx=15,pady=5)
 	tkgrid(to.change,row=1,column=5,padx=15,pady=5)
 	for (i in 1:length(epigenome)) {
-		trks$lab[[i]] <- tklabel(mantrk,text=names(epigenome)[i])
+		trks$lab[[i]] <<- tklabel(mantrk,text=names(epigenome)[i])
 		mantrk$env$canvas[[i]] = tk2canvas(mantrk,width=30,height=10,bg=epigenome[[i]]$color)
-		trks$entry[[i]] <- tkentry(mantrk,width=5,textvariable=tclVar(epigenome[[i]]$level))
+		trks$entry[[i]] <<- tkentry(mantrk,width=5,textvariable=tclVar(epigenome[[i]]$level))
 		tkgrid(trks$lab[[i]],row=i+1,column=1,padx=15,pady=5)
 		tkgrid(mantrk$env$canvas[[i]],row=i+1,column=2,padx=15,pady=5)
 		tkgrid(trks$entry[[i]],row=i+1,column=3,padx=15,pady=5)
@@ -167,10 +167,10 @@ import.bw=function(files) {
 		trackname = unlist(strsplit(files[i],split="/",fixed=FALSE,perl=FALSE,useBytes=FALSE))
 		trackname = trackname[length(trackname)]
 		trackname = unlist(strsplit(trackname,split="\\."))[1]
-		epigenome[[trackname]] <- list()
-		epigenome[[trackname]]$level <- 0
-		epigenome[[trackname]]$color <- plotcols[i]
-		epigenome[[trackname]]$track <- import(files[i])
+		epigenome[[trackname]] <<- list()
+		epigenome[[trackname]]$level <<- 0
+		epigenome[[trackname]]$color <<- plotcols[i]
+		epigenome[[trackname]]$track <<- import(files[i])
 		cat("Finished reading file\n")
 	}
 }
@@ -208,19 +208,19 @@ changecolor=function() {
 #Condition/replicate plot setting util
 verify.plot.settings=function() {
 	for (i in 1:length(settings)) {
-		settings[[i]]$name <- as.character(tkget(pset[[i]]))
+		settings[[i]]$name <<- as.character(tkget(pset[[i]]))
 	}
 	tkdestroy(manage)
 }
 
 #Plotting settings for condition/replicates
 manage.set=function() {
-	manage <- tktoplevel()
+	manage <<- tktoplevel()
 	tktitle(manage)="Plot settings for conditions"
 	labname=tklabel(manage,text="Name")
 	labcol=tklabel(manage,text="Color")
 	manage$env$change = tk2button(manage, text="Change Color", command = changecolor)
-	to.change <- tkentry(manage,width=5,textvariable=tclVar("1"))
+	to.change <<- tkentry(manage,width=5,textvariable=tclVar("1"))
 	tkgrid(labname, row=1, column=2, padx=15, pady=5)
 	tkgrid(labcol, row=1, column=3, padx=15, pady=5)
 	tkgrid(manage$env$change, row=1, column=4, padx = 15, pady=5)
@@ -228,7 +228,7 @@ manage.set=function() {
 	for (i in 1:length(settings)) {
 		lablevel=tklabel(manage, text=paste(settings[[i]][["N"]],collapse=","))
 		tkgrid(lablevel, row=i+1, column=1, sticky="e",pady=5)
-		pset[[i]] <- tkentry(manage,width=10,textvariable=tclVar(settings[[i]]$name))
+		pset[[i]] <<- tkentry(manage,width=10,textvariable=tclVar(settings[[i]]$name))
 		manage$env$canvas[[i]] = tk2canvas(manage, width=30, height=10, bg=settings[[i]]$color)
 		tkgrid(pset[[i]],row=i+1, column=2, padx=15, pady=5)
 		tkgrid(manage$env$canvas[[i]],row=i+1,column=3, padx=15, pady=5)
@@ -245,18 +245,18 @@ verify.settings=function() {
 		assign[i] = as.integer(tkget(set$entry[[i]]))
 	}
 	names(assign) = N
-	keep=assign[is.integer(assign) & assign>0]
-	levels=unique(keep)
-	settings <- list()
+	assign=assign[is.integer(assign) & assign>0]
+	levels=unique(assign)
+	settings <<- list()
 	for (l in 1:length(levels)) {
-		settings[[levels[l]]] <- list()
+		settings[[levels[l]]] <<- list()
 		hits = which(assign==levels[l])
 		names = names(hits)
 		name=unlist(strsplit(names[1],"\\."))[1]
-		settings[[levels[l]]][["name"]] <- name
-		settings[[levels[l]]][["N"]] <- names(hits)
-		settings[[levels[l]]][["cols"]] <- hits+10
-		settings[[levels[l]]][["color"]] <- plotcols[l]
+		settings[[levels[l]]][["name"]] <<- name
+		settings[[levels[l]]][["N"]] <<- names(hits)
+		settings[[levels[l]]][["cols"]] <<- hits+10
+		settings[[levels[l]]][["color"]] <<- plotcols[l]
 	}
 	tkdestroy(select)
 	return(settings)
@@ -270,16 +270,16 @@ set.conditions=function(ibed) {
 		cat("File must have first ten ibed columns, plus sequence read columns\n")
 		return(NULL)
 	}
-	N <- cols[-(1:10)]
+	N <<- cols[-(1:10)]
 	if(length(N)!=length(unique(N))) {
 		cat("Sequence read columns must be unique\n")
 		return(NULL)
 	}
-	select <- tktoplevel()
+	select <<- tktoplevel()
 	tktitle(select)="Manage conditions and replicates"
 	for (i in 1:length(N)) {
-		set$lab[[i]] <- tklabel(select,text=N[i])
-		set$entry[[i]] <- tkentry(select,width=10,textvariable=tclVar("0"))
+		set$lab[[i]] <<- tklabel(select,text=N[i])
+		set$entry[[i]] <<- tkentry(select,width=10,textvariable=tclVar("0"))
 		tkgrid(set$lab[[i]],row=i,column=1,sticky="e",pady=5)
 		tkgrid(set$entry[[i]],row=i,column=2,sticky="w",pady=5)
 	}
@@ -294,7 +294,7 @@ load.ibed = function() {
 		return()
 	}
 	cat(paste0("opening file ",ifile,"\n"))
-	ibed <- as.data.frame(fread(ifile,header=TRUE,fill=TRUE),stringsAsFactors=FALSE)
+	ibed <<- as.data.frame(fread(ifile,header=TRUE,fill=TRUE),stringsAsFactors=FALSE)
 	set.conditions(ibed)
 }
 
@@ -344,6 +344,7 @@ parking=function(left,right) {
 #Gene plot sub
 plot.genes=function(genome,x.min,x.max) {
 	y_plot=parking(genome$Start,genome$End)
+	par(mar=c(0,2,0,2)+0.1)
 	plot(c(x.min,x.max),c(1,-max(y_plot)-0.5),col="white",ylab="",xlab="",fg="white",col.axis="white",xaxs="i",yaxs="i")
 	arrowHeads=pretty(x.min:x.max,n=50)
 	for(i in 1:dim(genome)[1]) {
@@ -396,6 +397,7 @@ plot.tracks=function(chr,x.min,x.max, tracks) {
 		plotlim=max(c(plotlim,score(tmp)))
 	}
 	for (i in 1:length(tmps)) {
+		par(mar=c(0,2,0,2)+0.1)
 		plot.new()
 		plot.window(xlim=c(x.min,x.max),ylim=c(0,plotlim),xaxs="i",yaxs="i",xaxt="n",yaxt="n",xlab="",ylab="")
 		segments(start(tmps[[i]]),0,end(tmps[[i]]),score(tmps[[i]]),col=epigenome[[tracks[i]]]$color)
@@ -484,7 +486,8 @@ plot.chic = function(ibed,gene,min.plot,max.plot,win.plot,settings) {
 				inttab=inttab[inttab$Bait_name==gene,]
 				inttab=inttab[inttab$start_OE>=x.min & inttab$end_OE<=x.max,]
 				intcol=keep[[i]]$color
-				rect(inttab$start_OE,rep(0,dim(inttab)[1]),inttab$end_OE,rep(y.max,dim(inttab)[1]),border=intcol)
+				points(inttab$start_OE,inttab$N,col=intcol,pch=19)
+				#rect(inttab$start_OE,rep(0,dim(inttab)[1]),inttab$end_OE,rep(y.max,dim(inttab)[1]),border=intcol)
 			}
 		}
 		intcols=c()
@@ -504,7 +507,7 @@ plot.chic = function(ibed,gene,min.plot,max.plot,win.plot,settings) {
 	}
 	#other plots - epigenomic tracks, with level-specific autoscaling
 	if(n.plots>0) {
-		plottracklevels <- get.track.levels(epigenome)
+		plottracklevels <<- get.track.levels(epigenome)
 		for (l in 1:length(plottracklevels)) {
 			plot.tracks(table$chr_Bait,x.min,x.max,plottracklevels[[l]])
 		}
@@ -523,16 +526,18 @@ refresh.gui = function() {
 	win.plot = as.numeric(tclvalue(tkget(win.plot)))
 	hscale = 1.99
 	vscale = 1.99
+	options(show.error.messages = FALSE)
 	if(is.null(browse$env$plot)) {
-		options(show.error.messages = FALSE)
-		browse$env$plot = try(tkrplot(browse, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale),silent=TRUE)
+		
+		browse$env$plot = tkrplot(browse, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale)
 		tkgrid(browse$env$plot)
 	}
 	else {
-		options(show.error.messages = FALSE)
-		try(tkrreplot(browse$env$plot, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale),silent=TRUE)
+	
+		tkrreplot(browse$env$plot, plot.chic(ibed=ibed,gene,min.plot,max.plot,win.plot,settings=settings),hscale=hscale,vscale=vscale)
 		tkgrid(browse$env$plot)
 	}
+	options(show.error.messages = TRUE)
 }
 
 ########################################################################################################################
@@ -575,22 +580,22 @@ tkadd(main$env$menuTrk, "command", label="Manage Tracks", command=manage.tracks)
 
 #Plot window and bait choice
 labmin = tklabel(main,text="start coordinate")
-min.plot <- tkentry(main, width=20, textvariable=tclVar("NA"))
+min.plot <<- tkentry(main, width=20, textvariable=tclVar("NA"))
 tkgrid(labmin, row=1, column=1, sticky="e")
 tkgrid(min.plot, row=1, column=2, sticky="w")
 
 labmax = tklabel(main,text="end coordinate")
-max.plot <- tkentry(main, width=20, textvariable=tclVar("NA"))
+max.plot <<- tkentry(main, width=20, textvariable=tclVar("NA"))
 tkgrid(labmax, row=2, column=1, sticky="e")
 tkgrid(max.plot, row=2, column=2, sticky="w")
 
 labwin = tklabel(main,text="plot window")
-win.plot <- tkentry(main, width=10, textvariable=tclVar("1000000"))
+win.plot <<- tkentry(main, width=10, textvariable=tclVar("1000000"))
 tkgrid(labwin, row=3, column=1, sticky="e")
 tkgrid(win.plot, row=3, column=2, sticky="w")
 
 labbait = tklabel(main,text="bait")
-bait <- tkentry(main, width=10, textvariable=tclVar("Myc"))
+bait <<- tkentry(main, width=10, textvariable=tclVar("Myc"))
 tkgrid(labbait, row=4, column=1, sticky="e")
 tkgrid(bait, row=4, column=2, sticky="w")
 
