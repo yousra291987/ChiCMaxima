@@ -499,7 +499,7 @@ plot.chic = function(ibed,gene,min.plot,max.plot,win.plot,settings) {
 		}
 		par(mar=c(0,2,0,2)+0.1)
 		plot.new()
-		legend("left",inset=0.05,names(keep),col=intcols,lty=1.5,title="Interactions")
+		legend("center",inset=0.05,names(keep),col=intcols,lty=1.5,title="Interactions")
 	}
 	n.plots=n.plots-1
 	#second plot - gene track
