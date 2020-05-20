@@ -245,8 +245,8 @@ verify.settings=function() {
 		assign[i] = as.integer(tkget(set$entry[[i]]))
 	}
 	names(assign) = N
-	assign=assign[is.integer(assign) & assign>0]
-	levels=unique(assign)
+	keep=assign[is.integer(assign) & assign>0]
+	levels=unique(keep)
 	settings <<- list()
 	for (l in 1:length(levels)) {
 		settings[[levels[l]]] <<- list()
