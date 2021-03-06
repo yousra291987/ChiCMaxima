@@ -5,7 +5,7 @@ Version: 1.0
 Authors@R: c(person("Yousra", "Ben Zouari", role = c("aut", "cre"), 
     email = "yousra.benzouari@gmail.com")
 Description: a pipeline for analyzing and identificantion of chromation loops in CHi-C promoters data.
-License:  GPL-2.0
+License:  GPL-2.0 +file LICENCE
 Encoding: UTF-8
 Depends: R (>= 3.2)
 Imports: GenomicRanges, 
