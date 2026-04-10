@@ -183,6 +183,84 @@ See AdditionalFile 2 for more explanation
 ![alt text](https://github.com/yousra291987/ChiCMaxima/blob/master/logo/screenshot_browser.png)
 
 
+# ChiCMaxima Interactive Browser (R Shiny)
+
+`app.R` provides an interactive web-based browser for visualising Promoter Capture Hi-C data, built with R Shiny. It reproduces all functionality of the original Tcl/Tk desktop GUI (`ChiCBrowser.r`) in a browser-accessible interface with no desktop windowing system required.
+
+---
+
+## Requirements
+
+```r
+install.packages(c("shiny", "data.table", "caTools"))
+# Bioconductor packages
+BiocManager::install(c("limma", "rtracklayer"))
+```
+
+---
+
+## Usage
+
+```r
+shiny::runApp("app.R")
+```
+
+The app opens in your default browser. Follow the steps below.
+
+---
+
+## Workflow
+
+### 1. Load interaction data
+Upload an `.ibed` file via **"ibed interaction file"**. The file must contain the 10 standard ibed columns followed by one column per sample (replicate).
+
+### 2. Assign replicates to conditions
+After loading, a row appears for each sample column. Enter a positive integer to assign it to a condition (`1`, `2`, `3`, …) or `0` to exclude it. Click **Apply Conditions**.
+
+### 3. Name and colour conditions
+Each condition gets a default name (taken from the column header) and colour. Edit these under **Condition names & colours** and click **Apply Names & Colours**.
+
+### 4. Navigate to a bait
+Enter a bait gene name (must match `Bait_name` in the ibed file) and set either:
+- a **window size** (bp centred on the bait fragment), or
+- explicit **start / end coordinates**.
+
+Click **Plot**.
+
+### 5. Optional tracks
+
+| Track type | Format | Notes |
+|---|---|---|
+| Gene annotation | `.txt` (tab-delimited, columns: `Chr`, `Start`, `End`, `Strand`, `Name`) | Drawn with directional arrows |
+| Epigenomic signal | `.bw` (BigWig) or `.bedGraph` | Assign a **display level** (integer ≥ 1); tracks at the same level share a panel. Set to `0` to hide. |
+| Called interactions | `.ibed` | Overlaid as points on the CHiC profile. Can be toggled on/off individually. |
+
+### 6. Export
+Click **Save Figure (PDF)** to download a publication-ready PDF of the current view.
+
+---
+
+## Plot description
+
+The main panel shows a running-mean quantile-normalised CHiC interaction profile. Each condition is plotted as a separate coloured line. A dashed vertical line marks the bait fragment centre. Optional sub-panels below show (in order): called interaction overlays, gene annotation, and epigenomic signal tracks.
+
+---
+
+## Input file formats
+
+**ibed file** – tab-delimited with a header row. The first 10 columns are standard ibed fields; subsequent columns are per-sample read counts:
+
+```
+chr_Bait  start_Bait  end_Bait  Bait_ID  Bait_name  chr_OE  start_OE  end_OE  OE_ID  OE_name  sample1  sample2  ...
+```
+
+**Gene annotation file** – tab-delimited with a header row:
+
+```
+Chr  Start  End  Strand  Name
+```
+
+
 # Dependencies:
 
     R version >= 3.2
